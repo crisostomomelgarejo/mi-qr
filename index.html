@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirigiendo...</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCGC3BNPD3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-RCGC3BNPD3');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 20px;
+      color: #333;
+    }
+    .logo {
+      width: 64px; height: 64px;
+      background: #f5ece6;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo svg { width: 36px; height: 36px; }
+    p { font-size: 15px; color: #666; }
+    .dot-row { display: flex; gap: 6px; }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #8B2500;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    .dot:nth-child(2){ animation-delay: .2s; }
+    .dot:nth-child(3){ animation-delay: .4s; }
+    @keyframes pulse {
+      0%, 100% { opacity: .25; transform: scale(.8); }
+      50%       { opacity: 1;   transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <!-- ══════════════════════════════════════════════
+         2. Opcional: pega aquí tu logo como SVG
+            o usa un <img src="logo.png" />
+         ══════════════════════════════════════════════ -->
+    <svg viewBox="0 0 24 24" fill="none" stroke="#8B2500" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="9" y1="13" x2="15" y2="13"/>
+      <line x1="9" y1="17" x2="13" y2="17"/>
+    </svg>
+  </div>
+
+  <p>Abriendo archivo…</p>
+  <div class="dot-row">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════
+    // 3. REEMPLAZA esta URL con tu enlace de Drive
+    // ══════════════════════════════════════════════
+    const DRIVE_URL = 'https://drive.google.com/TU-ENLACE-AQUI';
+
+    // ── Detectar dispositivo ──────────────────────
+    const ua = navigator.userAgent;
+    const device =
+      /Mobile|Android|iPhone|iPad/.test(ua) ? 'mobile' :
+      /Tablet|iPad/.test(ua)                ? 'tablet' : 'desktop';
+
+    // ── Enviar evento a Google Analytics 4 ────────
+    gtag('event', 'qr_scan', {
+      event_category : 'QR',
+      event_label     : 'drive_redirect',
+      device_type     : device,
+      page_referrer   : document.referrer || 'direct'
+    });
+
+    // ── Redirigir después de que GA registre ──────
+    //    200 ms es suficiente; GA es non-blocking
+    setTimeout(() => { window.location.replace(DRIVE_URL); }, 200);
+  </script>
+
+</body>
+</html>
